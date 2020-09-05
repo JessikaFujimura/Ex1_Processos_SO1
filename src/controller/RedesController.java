@@ -31,7 +31,14 @@ public class RedesController {
 				}
 				if(process.contains("PING")){
 					result = line.trim();
-					
+				}
+				if(process.contains("ifconfig")){
+					if(line.contains("flags") ){
+						result += line.substring(0,line.indexOf(":")) + "\n";
+					}
+					if(line.contains("netmask")){
+						result += line.substring(0,(line.indexOf("m")- 3)).trim() + "\n \n";
+					}
 				}
 				line = buffer.readLine();
 			}
@@ -49,7 +56,7 @@ public class RedesController {
 		String process = "";
 		if(systemName.contains("Windows 10")){
 			process = "ipconfig";
-		}else {
+		}if(systemName.contains("Linux")) {
 			process = "ifconfig";
 		}
 		return readProcess(process);
@@ -60,7 +67,7 @@ public class RedesController {
 		String process = "";
 		if(systemName.contains("Windows 10")){
 			process = "PING www.google.com.br";
-		}else {
+		}if(systemName.contains("Linux")) {
 			process = "ifconfig";
 		}
 		String avg = readProcess(process);
