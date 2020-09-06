@@ -74,9 +74,9 @@ public class RedesController {
 			process = "ping -c 10 www.google.com.br";
 			avg = readProcess(process);
 			String[] group = avg.split("/");
-			avg = "Tempo médio de chamada para o site www.google.com.br: "+ group[4] + " ms\n";
+			avg = group[4] + " ms\n";
 		}
-		return avg;
+		return "Tempo medio de chamada para o site www.google.com.br: "+ avg + "\n";
 	}
 	
 }
