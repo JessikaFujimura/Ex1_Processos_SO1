@@ -8,11 +8,10 @@ public class Main {
 		String name = System.getProperty("os.name");
 			
 		RedesController test = new RedesController();
-//		String result = test.ping(name);
-		String result = test.ip(name);
-		System.out.println(result);
+		String resultPing = test.ping(name);
+		String resultIP = test.ip(name);
+		System.out.println(resultPing);
+		System.out.println(resultIP);
 	}
 
 }
-
-//.substring(result.indexOf("a") + 3

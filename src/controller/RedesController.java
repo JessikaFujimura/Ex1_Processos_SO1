@@ -29,7 +29,7 @@ public class RedesController {
 						result += adapter + "\n" + line + "\n \n";
 					}
 				}
-				if(process.contains("PING")){
+				if(process.contains("PING") || process.contains("ping")){
 					result = line.trim();
 				}
 				if(process.contains("ifconfig")){
@@ -65,13 +65,17 @@ public class RedesController {
 	
 	public String ping(String systemName){
 		String process = "";
+		String avg = "";
 		if(systemName.contains("Windows 10")){
-			process = "PING www.google.com.br";
+			process = "PING -n 10 www.google.com.br";
+			avg = readProcess(process);
+			avg = avg.substring(avg.lastIndexOf(" "));
 		}if(systemName.contains("Linux")) {
-			process = "ifconfig";
+			process = "ping -c 10 www.google.com.br";
+			avg = readProcess(process);
+			String[] group = avg.split("/");
+			avg = "Tempo médio de chamada para o site www.google.com.br: "+ group[4] + " ms\n";
 		}
-		String avg = readProcess(process);
-		avg = avg.substring(avg.lastIndexOf(" "));
 		return avg;
 	}
 	
